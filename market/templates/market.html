@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row" style="margin-top:20px; margin-left:20px">
+    <div class="col-8">
+       <h3>Available books on the Market</h3>
+       <p>Click on one of the book to start borrowing</p>
+       <br>
+    <div class="table-responsive">
+    <table class="table table-hover ">
+      <thead>
+          <tr >
+              <!-- Your Columns HERE -->
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Author</th>
+              <th scope="col">Price</th>
+              <th scope="col">Options</th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Your rows inside the table HERE: -->
+          {% for item in items %}
+              <tr>
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.author }}</td>
+                  <td>{{ item.price }}$</td>
+                  <td>
+                      <button class="btn btn-outline btn-info" >
+                          <a href="{{ url_for('details_page', id=item.id) }}" style="color:white;">More Info</a>
+                      </button>
+                      <button class="btn btn-outline btn-success">
+                          <a href="{{ url_for('purchase_page', id=item.id) }}" style="color:white;">Borrow this Book</a>
+                      </button>
+                  </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    </div>
+   <div class="col-4">
+        <h3>Owned Books</h3>
+        <p>Click on return book to put an book back on the Market</p>
+        <br>
+        <div class="row">
+           {% for owned_item in owned_items %}
+             <div class="col-md-6">
+                 <div style="margin-bottom: 5px" class="card text-center ">
+                      <div class="card-body">
+                          <h5 class="card-title">{{ owned_item.name }}</h5>
+                        <button class="btn btn-outline btn-danger">
+                          <a href="{{ url_for('sell_page', id=owned_item.id) }}" style="color:white;">Return this Book</a>
+                        </button>
+                          <p class="card-text"><strong>
+                              This item costs {{ owned_item.price }}$
+                          </strong></p>
+                      </div>
+                  </div>
+             </div>
+           {% endfor %}
+        </div>
+   </div>
+    </div>
+
+{% endblock content %}

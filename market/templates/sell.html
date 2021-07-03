@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for owned_item in owned_items %}
+    <div class="card-body" style="margin-top:20px; margin-left:20px">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col">
+          <div class="card-body">
+            <form method="post">
+                {{ selling_form.hidden_tag() }}
+                <p>Are you sure you want to return {{ owned_item.name }} for {{ owned_item.price }}$ ?</p>
+                <button class="btn btn-outline btn-secondary">
+                  <a href="{{ url_for('market') }}" style="color:white;">No</a>
+                </button>
+              <input id="sold_item" name="sold_item" type="hidden" value="{{owned_item.name}}">
+              {{ selling_form.submit(class="btn btn-outline btn-danger") }}
+            </form>
+        </div>
+        </div>
+        <div class="col">
+        </div>
+        {% endfor %}
+{% endblock content %}

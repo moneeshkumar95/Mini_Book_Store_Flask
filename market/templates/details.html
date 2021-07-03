@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="card-body" style="margin-top:20px; margin-left:20px">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col">
+          {% for item in items %}
+                    <h3><b>{{ item.name }}</b> -- <b>{{ item.price }}$</b></h3>
+                    <p><b>By</b> {{item.author}}</p>
+                    <h5><b>Description: </b></h5>
+                    <p>{{ item.description }}</p>
+                    <p>
+                        <button class="btn btn-outline btn-secondary">
+                          <a href="{{ url_for('market') }}" style="color:white;">Back</a>
+                        </button>
+                        <button class="btn btn-outline btn-success">
+                          <a href="{{ url_for('purchase_page', id=item.id) }}" style="color:white;">Purchase this Item</a>
+                        </button>
+                    </p>
+          {% endfor %}
+        </div>
+        <div class="col">
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
